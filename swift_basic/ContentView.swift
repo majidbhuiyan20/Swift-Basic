@@ -1,21 +1,12 @@
-//
-//  ContentView.swift
-//  swift_basic
-//
-//  Created by TOMA on 11/1/26.
-//
-
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        Image("niagarafalls")
+            .resizable()
+            .cornerRadius(20).padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            .aspectRatio(contentMode: .fit)
+        Text(/*@START_MENU_TOKEN@*/"Placeholder"/*@END_MENU_TOKEN@*/)
     }
 }
 
