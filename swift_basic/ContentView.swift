@@ -9,78 +9,138 @@ struct ContentView: View {
     var body: some View {
         NavigationStack { // 👈 Add this for navigation
             ZStack {
-                Color.blue
+                Color.purple
                     .ignoresSafeArea()   // full screen background
 
-                VStack(spacing: 20) {
-                    Image("niagarafalls")
-                        .resizable()
-                        .cornerRadius(20)
-                        .padding()
-                        .aspectRatio(contentMode: .fit)
-
-                    Text("Placeholder")
-                        .font(.largeTitle)
-                    
-                    Text("Counter App")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                    
-                    Text("\(count)")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                    
-                    HStack(spacing: 20){
-                        Button(action:{
-                            count -= 1
-                        }){
-                            Text("-")
-                                .font(.largeTitle)
-                                .frame(width: 60, height: 60)
-                                .foregroundColor(.white)
-                                .background(Color.red)
-                                .cornerRadius(10)
+                ScrollView(.vertical, showsIndicators: true) {
+                    VStack(spacing: 20) {
+                        Image("niagarafalls")
+                            .resizable()
+                            .cornerRadius(20)
+                            .padding()
+                            .aspectRatio(contentMode: .fit)
+                        
+                        Text("Placeholder")
+                            .font(.largeTitle)
+                        
+                        Text("Counter App")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                        
+                        Text("\(count)")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                        
+                        HStack(spacing: 20){
+                            Button(action:{
+                                count -= 1
+                            }){
+                                Text("-")
+                                    .font(.largeTitle)
+                                    .frame(width: 60, height: 60)
+                                    .foregroundColor(.white)
+                                    .background(Color.red)
+                                    .cornerRadius(10)
+                            }
+                            
+                            Button(action:{
+                                count += 1
+                            }){
+                                Text("+")
+                                    .font(.largeTitle)
+                                    .frame(width: 60, height: 60)
+                                    .foregroundColor(.white)
+                                    .background(Color.green)
+                                    .cornerRadius(10)
+                            }
                         }
                         
-                        Button(action:{
-                            count += 1
+                        // Navigation Button
+                        Button(action: {
+                            navigate = true
                         }){
-                            Text("+")
-                                .font(.largeTitle)
-                                .frame(width: 60, height: 60)
+                            Text("Go To Second Screen")
+                                .font(.headline)
+                                .padding()
+                                .background(Color.orange)
                                 .foregroundColor(.white)
-                                .background(Color.green)
                                 .cornerRadius(10)
                         }
-                    }
-
-                    // Navigation Button
-                    Button(action: {
-                        navigate = true
-                    }){
-                        Text("Go To Second Screen")
-                            .font(.headline)
+                        // Hidden NavigationLink
+                        NavigationLink("", destination: SecondView(), isActive: $navigate)
+                            .hidden()
+                        
+                        //Naivigation button is end here
+                        
+                        Button("Go to third Screen"){navigateThird = true}
                             .padding()
-                            .background(Color.orange)
+                            .background(Color.purple)
                             .foregroundColor(.white)
-                            .cornerRadius(10)
-                    }
-                    // Hidden NavigationLink
-                    NavigationLink("", destination: SecondView(), isActive: $navigate)
-                        .hidden()
-                    
-                    //Naivigation button is end here
-                    
-                    Button("Go to third Screen"){navigateThird = true}
+                            .fontWeight(.bold)
+                            .cornerRadius(20)
+                        
+                        NavigationLink("", destination: ThirdView(), isActive: $navigateThird)
+                        
+                        HStack(spacing: 20){
+                            //Home Button Start Here
+                            Button("Home"){
+                                print("This is Home button")
+                            }
+                            .buttonStyle(.borderedProminent)
+                            
+                            //Home Button end here
+                            
+                            Button("Settings"){
+                                print("This is Settings button")
+                            }
+                            .buttonStyle(.borderedProminent)
+                            
+                            //Settings button end here
+                            
+                            Button("Profile"){
+                                print("This is Profile Button")
+                            }
+                            .buttonStyle(.borderedProminent)
+                            //Profile button end here
+                            
+                            Button("Logout"){
+                                print("This is Logout button")
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .tint(.red)
+                            
+                            
+                        }
+                        Button(action: {
+                            print("Gradient button tapped")
+                        }) {
+                            Text("Gradient Button")
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(
+                                    LinearGradient(
+                                        colors: [Color.purple, Color.blue],
+                                        startPoint: .leading,
+                                        endPoint: .trailing
+                                    )
+                                )
+                                .cornerRadius(12)
+                                .shadow(color: .gray.opacity(0.5), radius: 5, x: 0, y: 5)
+                        }
                         .padding()
-                        .background(Color.purple)
-                        .foregroundColor(.white)
-                        .fontWeight(.bold)
-                        .cornerRadius(20)
-                    
-                    NavigationLink("", destination: ThirdView(), isActive: $navigateThird)
-                    
+                        VStack(spacing: 20) {
+                            Button("1") { }
+                            Button("2") { }
+                            Button("3") { }
+                            Button("4") { }
+                            Button("5") { }
+                            Button("6") { }
+                        }
+                        
+                    }
                 }
             }
         }
