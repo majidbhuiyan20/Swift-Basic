@@ -140,12 +140,65 @@ struct ContentView: View {
                             Button("6") { }
                         }
                         
+                        HStack{
+                            Button("Button1"){
+                                print("Button is Pressed")
+                            }.buttonStyle(.borderedProminent)
+                            
+                            Button("Button2"){
+                                print("Button is Pressed")
+                            }.buttonStyle(.borderedProminent)
+                        }
+                        
+                        VStack{
+                            Text("Hello SwiftUI")
+                            ScrollView(.horizontal, showsIndicators: false){
+                                HStack(spacing: 12){
+                                    Button("Click Me"){
+                                        
+                                    }.buttonStyle(.borderedProminent)
+                                    Button("Click Me"){
+                                        
+                                    }.buttonStyle(.borderedProminent)
+                                    Button("Click Me"){
+                                        
+                                    }.buttonStyle(.borderedProminent)
+                                    Button("Click Me"){
+                                        
+                                    }.buttonStyle(.borderedProminent)
+                                }
+                            }
+                            
+                        }
+                        .frame(width: 350, height: 200)
+                        .padding()
+                        .background(Color.orange)
+                        .cornerRadius(10)
+                    
                     }
                 }
             }
+            .toolbar{
+                ToolbarItem(placement: .navigationBarLeading){
+                    //Button(action:{print("Menu is Tapped")}){}
+                    Image(systemName: "line.horizontal.3")
+                }
+                ToolbarItem(placement: .navigationBarTrailing){
+                    HStack(){
+                        Image(systemName: "magnifyingglass")
+                        Spacer().frame(width: 16)
+                        Image(systemName: "person.circle")
+                    }.padding()
+                    
+                }
+            }
         }
+        
     }
 }
+
+
+
 
 #Preview {
     ContentView()
