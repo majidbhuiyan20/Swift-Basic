@@ -2,8 +2,30 @@ import SwiftUI
 
 struct HabitTracker: View {
     
+    @State private var selectedDayIndex: Int? = nil
+    @State private var selectedDateIndex: Int = 0
+    
     let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-        @State private var selectedDayIndex: Int? = nil
+    
+    // Generate dates of current month
+    
+    private var currentMonthDates: [Int] {
+        let calendar = Calendar.current    // correct spelling
+        let date = Date()
+        let range = calendar.range(of: .day, in: .month, for: date)!
+        return Array(range)
+    }
+    private var currentWeekDates: [Int] {
+           let calendar = Calendar.current
+           let today = Date()
+           let weekday = calendar.component(.weekday, from: today) // 1...7
+           let startOffset = -((weekday - 1) % 7) // start Sunday
+           let weekRange = startOffset..<(startOffset + 7)
+           return weekRange.map { offset in
+               calendar.component(.day, from: calendar.date(byAdding: .day, value: offset, to: today)!)
+           }
+       }
+    
     
     
     var body: some View {
@@ -11,10 +33,10 @@ struct HabitTracker: View {
             HStack{
                 VStack(alignment: .leading){
                     Text("Yesterday")
-//                        .font(.headline)
+                    //                        .font(.headline)
                         .font(.system(size: 24, weight: .bold))
                         .foregroundColor(.white)
-                        
+                    
                     Text("100% Finished")
                         .font(.subheadline)
                         .foregroundColor(.green)
@@ -30,7 +52,7 @@ struct HabitTracker: View {
                         .background(Color.blue)
                         .clipShape(Circle())
                 }
-
+                
             }
             .padding(.horizontal)
             
@@ -53,27 +75,64 @@ struct HabitTracker: View {
                                     .onTapGesture {
                                         selectedDayIndex = index
                                     }
-                                    
+                                
                             }
                         }
                         .onAppear{
                             selectedDayIndex = Calendar.current.component(.weekday, from: Date()) - 1
+                            selectedDateIndex = Calendar.current.component(.day, from: Date()) - 1
                         }
                         .foregroundColor(Color.mySecondary)
                         .frame(maxWidth: .infinity)
                         .padding()
                         
+                        
+                        //Mark: Dates of Current Month
+                        ScrollView(.horizontal, showsIndicators: false){
+                            HStack(spacing: 25){
+                                ForEach(currentMonthDates.indices, id: \.self){
+                                    index in let day = currentMonthDates[index]
+                                    Text("\(day)")
+                                        .foregroundColor(selectedDateIndex == index ? .white : .gray)
+                                        .padding(.horizontal, 16)
+                                        .background(RoundedRectangle(cornerRadius: 10)
+                                            .fill(selectedDateIndex == index ? Color.blue : Color.clear)
+                                        )
+                                        .contentShape(Rectangle())
+                                        .onTapGesture {
+                                            selectedDayIndex = index
+                                        }
+                                }
+                            }
+                        }
+                        
+                        HStack(spacing: 10){
+                            ForEach (days.indices, id:\.self){
+                                index in VStack{
+                                    Text(days[index])
+                                        .foregroundColor(selectedDayIndex == index ? .white :.gray)
+                                        .fontWeight(.medium)
+                                    
+                                    let date = currentWeekDates[index]
+                                    Text("\(date)")
+                                        .foregroundColor(selectedDayIndex == index ? Color.blue: Color.clear)
+                                }
+                            }
+                        }
+                        
+                        
                         Spacer()
                     }
+                    
                 )
-
+            
             
         }
         .navigationBarHidden(true)
         .background(Color.appBarBackgroundColor)
-
+        
     }
-       
+    
 }
 
 extension View {
@@ -83,10 +142,10 @@ extension View {
 }
 
 struct RoundedCorner: Shape {
-
+    
     var radius: CGFloat = .infinity
     var corners: UIRectCorner = .allCorners
-
+    
     func path(in rect: CGRect) -> Path {
         let path = UIBezierPath(
             roundedRect: rect,
