@@ -3,13 +3,16 @@ import SwiftUI
 struct SwiftUIScreen: View {
     var body: some View {
         VStack(){
+            
+            // AppBar Created done
             VStack(alignment:.leading){
                 HStack(spacing: 16){
-                    Image(systemName: "person.circle.fill")
+                    Image(systemName: "person.circle.fill",)
                         .resizable()
                         .frame(width: 40, height: 40)
                         .clipShape(Circle())
                         .padding(.top, 16)
+                        .foregroundColor(.white)
                     VStack(alignment:.leading, spacing: -2){
                         Text("Majid Bhuiyan")
                             .font(.title2)
