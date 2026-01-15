@@ -97,6 +97,19 @@ struct ContentView: View {
                             
                         }
                         
+                        //Swift Ui Screen navigation
+                        
+                        NavigationStack{
+                            NavigationLink(destination: SwiftUIScreen()){
+                                Text("SwiftUI Screen")
+                                    .padding()
+                                    .background(Color.myAccent)
+                                    .foregroundColor(.white)
+                                    .fontWeight(.bold)
+                                    .cornerRadius(30)
+                            }
+                        }
+                        
                         // Navigation Button
                         Button(action: {
                             navigate = true
