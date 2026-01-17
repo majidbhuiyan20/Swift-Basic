@@ -3,6 +3,8 @@ import SwiftUI
 struct SwiftUIScreen: View {
     let imageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeRTw4l43rtDoc4oTRF1PS_eiWkSjxrlmhpQ&s"
     var body: some View {
+    
+    
         VStack(){
             
             // AppBar Created done
@@ -200,6 +202,37 @@ struct SwiftUIScreen: View {
                 
             
             Spacer()
+            TabView {
+                SecondView()
+                    .tabItem {
+                        Image(systemName: "house.fill")
+                        Text("Home")
+                    }
+                
+                SecondView()
+                    .tabItem {
+                        Image(systemName: "person.fill")
+                        Text("Profile")
+                    }
+                
+                SecondView()
+                    .tabItem {
+                        Image(systemName: "chart.bar.fill")
+                        Text("Statistics")
+                    }
+                
+                SecondView()
+                    .tabItem {
+                        Image(systemName: "gearshape.fill")
+                        Text("Settings")
+                    }
+                SecondView()
+                    .tabItem {
+                        Image(systemName: "gearshape.fill")
+                        Text("Settings")
+                    }
+            }
+
         }.navigationBarBackButtonHidden(true)
         
     
