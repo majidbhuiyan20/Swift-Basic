@@ -37,6 +37,7 @@ struct SwiftUIScreen: View {
             
             // AppBar Creation Done
             
+           //======Image as textTitle and subTitle background
             ZStack(alignment: .bottomLeading){
                 AsyncImage(url: URL(string: imageUrl)){
                     phase in if let image = phase.image{
@@ -130,6 +131,72 @@ struct SwiftUIScreen: View {
                     
                 }
             }.padding()
+            
+            Button(action:{
+                print("Button Tapped")
+            }){
+                HStack(spacing: 16){
+                    Image(systemName: "play.fill", ).bold()
+                    Text("Start Day")
+                        .font(.title2)
+                        .bold()
+                }
+                .padding(.horizontal, 20)
+                .padding(.vertical, 10)
+                .frame(maxWidth: .infinity)
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(25)
+                
+            }.padding(.horizontal, 20)
+        
+            VStack{
+                Spacer().frame(height: 16)
+                HStack(spacing: 10) {
+                    Text("Coach's Chose")
+                        .font(.system(size: 24))
+                        .bold()
+
+                    Image(systemName: "figure.strengthtraining.traditional")
+                        .font(.title2)
+                        .foregroundColor(.blue)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 16)
+
+            }
+            
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 16) {
+                    CategoryCard(
+                        iconName: "heart.fill",
+                        title: "Weight Loss",
+                        iconBgColor: .blue,
+                        iconColor: .blue
+                    )
+                    
+                    CategoryCard(
+                        iconName: "bolt.fill",
+                        title: "Strength",
+                        iconBgColor: .red,
+                        iconColor: .red
+                    )
+                    
+                    CategoryCard(
+                        iconName: "flame.fill",
+                        title: "Calories",
+                        iconBgColor: .orange,
+                        iconColor: .orange
+                    )
+                }
+                .padding(.horizontal, 16)
+            }
+
+
+
+
+
                 
             
             Spacer()
