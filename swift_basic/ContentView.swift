@@ -110,6 +110,18 @@ struct ContentView: View {
                             }
                         }
                         
+                        NavigationStack{
+                            NavigationLink(destination: StudentView()){
+                                Text("Student List")
+                                    .padding()
+                                    .background(Color.myAccent)
+                                    .foregroundColor(Color.white)
+                                    .fontWeight(.bold)
+                                    .cornerRadius(30)
+                                
+                            }
+                        }
+                        
                         // Navigation Button
                         Button(action: {
                             navigate = true
